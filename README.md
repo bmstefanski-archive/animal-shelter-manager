@@ -3,7 +3,7 @@ I'm making this program to remind the basics of java oop.
 You can add/delete your pet or check shelter's status. Everything is saved to the file (and loaded on the startup).
 
 ## How to use it? ##   
-You can find below a few command, if you found any **typo** please inform me.  
+You can find a few commands below, if you found any **typo** please inform me.  
 
 | Command                             | Description                         |
 | ----------------------------------- | ----------------------------------- |
