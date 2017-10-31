@@ -3,7 +3,7 @@ package pl.bmstefanski.asm.object;
 public class Animal {
 
     private final String name;
-    private final double health;
+    private double health;
     private long id = 0L;
     private int age = 0;
 
@@ -28,6 +28,14 @@ public class Animal {
 
     public int getAge() {
         return age;
+    }
+
+    public void setHealth(double health) {
+        this.health = health;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 
     @Override

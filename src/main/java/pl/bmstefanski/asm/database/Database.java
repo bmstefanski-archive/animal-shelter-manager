@@ -1,4 +1,4 @@
-package pl.bmstefanski.asm.data.database;
+package pl.bmstefanski.asm.database;
 
 public interface Database {
 

@@ -1,6 +1,6 @@
-package pl.bmstefanski.asm.data.database;
+package pl.bmstefanski.asm.database;
 
-public class MySQL implements Database {
+public class Flat implements Database {
 
     @Override
     public void checkData() {

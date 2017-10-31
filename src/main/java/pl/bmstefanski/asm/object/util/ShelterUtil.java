@@ -7,7 +7,7 @@ import java.util.*;
 
 public class ShelterUtil {
 
-    private static HashMap<String, Animal> ANIMALS = new HashMap<>();
+    public static HashMap<String, Animal> ANIMALS = new HashMap<>();
 
     public static void addAnimal(Animal animal, Shelter shelter) {
         if(ANIMALS.size() < shelter.getCapacity()) {
