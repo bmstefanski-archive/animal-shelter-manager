@@ -2,9 +2,9 @@ package pl.bmstefanski.asm;
 
 import pl.bmstefanski.asm.database.MySQL;
 import pl.bmstefanski.asm.manager.DatabaseManager;
-import pl.bmstefanski.asm.object.Animal;
-import pl.bmstefanski.asm.object.Shelter;
-import pl.bmstefanski.asm.object.util.ShelterUtil;
+import pl.bmstefanski.asm.basic.Animal;
+import pl.bmstefanski.asm.basic.Shelter;
+import pl.bmstefanski.asm.basic.util.ShelterUtil;
 
 import java.util.Arrays;
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 public class AnimalShelterManager {
 
-    private static DatabaseManager database = DatabaseManager.getInstance();;
+    private static DatabaseManager database = DatabaseManager.getInstance();
     private static MySQL mySQL = MySQL.getInstance();
 
     public static void main(String[] args) {

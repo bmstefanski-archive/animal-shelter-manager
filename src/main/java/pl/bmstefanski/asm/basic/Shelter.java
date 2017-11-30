@@ -1,8 +1,8 @@
-package pl.bmstefanski.asm.object;
+package pl.bmstefanski.asm.basic;
 
 public class Shelter {
 
-    private int capacity = 0;
+    private int capacity;
     private final String name;
 
     public Shelter(int capacity, String name) {

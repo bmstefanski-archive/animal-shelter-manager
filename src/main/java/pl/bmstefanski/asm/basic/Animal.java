@@ -1,11 +1,11 @@
-package pl.bmstefanski.asm.object;
+package pl.bmstefanski.asm.basic;
 
 public class Animal {
 
     private final String name;
     private double health;
-    private long id = 0L;
-    private int age = 0;
+    private long id;
+    private int age;
 
     public Animal(String name) {
         this.name = name;
