@@ -1,7 +1,5 @@
 package pl.bmstefanski.asm.basic;
 
-import pl.bmstefanski.asm.util.DateUtil;
-
 import java.sql.Timestamp;
 import java.util.UUID;
 

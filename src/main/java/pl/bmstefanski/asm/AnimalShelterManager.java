@@ -4,8 +4,12 @@ import pl.bmstefanski.asm.command.basic.CommandMap;
 import pl.bmstefanski.asm.command.basic.SimpleCommand;
 import pl.bmstefanski.asm.database.MySQL;
 import pl.bmstefanski.asm.manager.DatabaseManager;
+import pl.bmstefanski.asm.task.GrowingThread;
 
 import java.util.Scanner;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class AnimalShelterManager {
 
@@ -17,6 +21,9 @@ public class AnimalShelterManager {
         database.establishConnection();
         mySQL.checkData();
         mySQL.loadData();
+
+        ScheduledExecutorService service = Executors.newScheduledThreadPool(1);
+        service.scheduleAtFixedRate(new GrowingThread(), 0, 5, TimeUnit.HOURS);
 
         System.out.println("------------------[ ASM ]------------------");
         for (SimpleCommand simpleCommand : commandMap.getCommands()) {
