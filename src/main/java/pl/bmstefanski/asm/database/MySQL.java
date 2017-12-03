@@ -26,6 +26,7 @@ public class MySQL implements Database {
                     "`health` DOUBLE NOT NULL," +
                     "`age` INTEGER NOT NULL," +
                     "`uuid` VARCHAR(36) NOT NULL," +
+                    "`birth` DATETIME NOT NULL," +
                     "PRIMARY KEY (`name`));";
 
             PreparedStatement preparedStatement = database.getConnection().prepareStatement(sql);
@@ -49,6 +50,7 @@ public class MySQL implements Database {
                 animal.setHealth(resultSet.getDouble("health"));
                 animal.setAge(resultSet.getInt("age"));
                 animal.setUUID(UUID.fromString(resultSet.getString("uuid")));
+                animal.setBirth(resultSet.getLong("birth"));
 
                 ShelterUtil.ANIMALS.put(animal.getName(), animal);
             }
@@ -65,13 +67,14 @@ public class MySQL implements Database {
         ShelterUtil.ANIMALS.forEach((key, value) -> {
             try {
 
-                String sql = "UPDATE `animals` SET `name`=?, `health`=?, `age`=?, `uuid`=?";
+                String sql = "UPDATE `animals` SET `name`=?, `health`=?, `age`=?, `uuid`=?, `birth`=?";
 
                 PreparedStatement preparedStatement = database.getConnection().prepareStatement(sql);
                 preparedStatement.setString(1, value.getName());
                 preparedStatement.setDouble(2, value.getHealth());
                 preparedStatement.setInt(3, value.getAge());
                 preparedStatement.setString(4, value.getUUID().toString());
+                preparedStatement.setLong(5, value.getBirth());
 
                 preparedStatement.executeUpdate();
                 preparedStatement.close();
@@ -84,13 +87,14 @@ public class MySQL implements Database {
     @Override
     public void addAnimal(Animal animal) {
         try {
-            String sql = "INSERT INTO `animals` (`name`, `health`, `age`, `uuid`) VALUES (?, ?, ?, ?)";
+            String sql = "INSERT INTO `animals` (`name`, `health`, `age`, `uuid`, `birth`) VALUES (?, ?, ?, ?, ?)";
 
             PreparedStatement preparedStatemen = database.getConnection().prepareStatement(sql);
             preparedStatemen.setString(1, animal.getName());
             preparedStatemen.setDouble(2, animal.getHealth());
             preparedStatemen.setInt(3, animal.getAge());
             preparedStatemen.setString(4, animal.getUUID().toString());
+            preparedStatemen.setLong(5, animal.getBirth());
 
             preparedStatemen.executeUpdate();
             preparedStatemen.close();

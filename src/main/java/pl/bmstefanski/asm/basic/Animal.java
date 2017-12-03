@@ -8,12 +8,14 @@ public class Animal {
     private UUID uuid;
     private double health;
     private int age;
+    private long birth;
 
     public Animal(String name) {
         this.name = name;
         this.uuid = UUID.randomUUID();
         this.health = 100D;
         this.age = 10;
+        this.birth = 0L;
     }
 
     public String getName() {
@@ -42,6 +44,14 @@ public class Animal {
 
     public void setUUID(UUID uuid) {
         this.uuid = uuid;
+    }
+
+    public long getBirth() {
+        return birth;
+    }
+
+    public void setBirth(long birth) {
+        this.birth = birth;
     }
 
     @Override

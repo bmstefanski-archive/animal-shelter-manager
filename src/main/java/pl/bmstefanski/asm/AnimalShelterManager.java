@@ -1,20 +1,17 @@
 package pl.bmstefanski.asm;
 
+import pl.bmstefanski.asm.command.basic.CommandMap;
 import pl.bmstefanski.asm.database.MySQL;
 import pl.bmstefanski.asm.manager.DatabaseManager;
-import pl.bmstefanski.asm.basic.Animal;
 import pl.bmstefanski.asm.basic.Shelter;
-import pl.bmstefanski.asm.basic.util.ShelterUtil;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class AnimalShelterManager {
 
     private static DatabaseManager database = DatabaseManager.getInstance();
     private static MySQL mySQL = MySQL.getInstance();
+    private static final CommandMap commandMap = new CommandMap();
 
     public static void main(String[] args) {
         database.establishConnection();
@@ -36,49 +33,12 @@ public class AnimalShelterManager {
         while (true) {
             String result = scanner.nextLine();
 
-            List<String> arguments = Arrays.stream(result.split(" ")).collect(Collectors.toList());
+            if (result.startsWith(commandMap.getPrefix())) {
+                result = result.replaceFirst(commandMap.getPrefix(), "");
 
-            if (arguments.get(0).equalsIgnoreCase("!add")) {
-                if (arguments.size() != 2) {
-                    System.out.println("Correct usage: !add <animal>");
-                    continue;
-                }
-
-                ShelterUtil.addAnimal(getAnimalName(arguments), shelter);
+                commandMap.commandUser(result);
             }
-
-            else if (arguments.get(0).equalsIgnoreCase("!remove")) {
-                if (arguments.size() != 2) {
-                    System.out.println("Correct usage: !remove <animal>");
-                    continue;
-                }
-
-                ShelterUtil.removeAnimal(getAnimalName(arguments));
-            }
-
-            else if (arguments.get(0).equalsIgnoreCase("!animal")) {
-                if (arguments.size() != 2) {
-                    System.out.println("Correct usage: !animal <animal>");
-                    continue;
-                }
-
-                ShelterUtil.info(getAnimalName(arguments));
-            }
-
-            else if (result.equalsIgnoreCase("!list")) {
-                ShelterUtil.list();
-            } else if (result.equalsIgnoreCase("!status")) {
-                ShelterUtil.status(shelter);
-            } else if (result.equalsIgnoreCase("!save")) {
-                mySQL.saveData();
-                System.exit(0);
-            }
-
         }
-    }
 
-    private static Animal getAnimalName(List<String> arguments) {
-        String name = arguments.get(1);
-        return new Animal(name);
     }
 }

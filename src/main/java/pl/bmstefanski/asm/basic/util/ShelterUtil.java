@@ -19,6 +19,7 @@ public class ShelterUtil {
                 return;
             }
 
+            animal.setBirth(System.currentTimeMillis());
             mySQL.addAnimal(animal);
             System.out.println("Successfully added a pet named: " + animal.getName() + "!");
         } else System.out.println("Shelter is full, try again later!");
