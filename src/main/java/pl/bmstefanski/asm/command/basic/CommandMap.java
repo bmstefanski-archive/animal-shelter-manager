@@ -22,16 +22,16 @@ public class CommandMap {
             if (method.isAnnotationPresent(Command.class)) {
                 Command command = method.getAnnotation(Command.class);
                 method.setAccessible(true);
-                SimpleCommand simpleCommand = new SimpleCommand(command.name(), object, method);
+                SimpleCommand simpleCommand = new SimpleCommand(command.name(), command.description(), object, method);
                 commands.put(command.name(), simpleCommand);
             }
         }
     }
 
-    public boolean commandUser(String command) {
+    public void commandUser(String command) {
         Object[] objects = getCommand(command);
 
-        if (objects[0] == null) return false;
+        if (objects[0] == null) return;
 
         try {
             execute( ((SimpleCommand) objects[0]), command, (List<?>) objects[1]) ;
@@ -39,7 +39,6 @@ public class CommandMap {
             ex.printStackTrace();
         }
 
-        return true;
     }
 
     private Object[] getCommand(String command) {
