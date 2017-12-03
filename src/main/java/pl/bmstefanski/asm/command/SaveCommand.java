@@ -1,5 +1,6 @@
 package pl.bmstefanski.asm.command;
 
+import pl.bmstefanski.asm.AnimalShelterManager;
 import pl.bmstefanski.asm.command.basic.Command;
 import pl.bmstefanski.asm.database.MySQL;
 
@@ -13,5 +14,7 @@ public class SaveCommand {
     private void save(List<String> args) {
         mySQL.saveData();
         Runtime.getRuntime().exit(1);
+
+        AnimalShelterManager.EXECUTOR_SERVICE.shutdown();
     }
 }
