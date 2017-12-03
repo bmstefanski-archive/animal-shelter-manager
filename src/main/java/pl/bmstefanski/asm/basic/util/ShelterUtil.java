@@ -9,7 +9,7 @@ import java.util.*;
 
 public class ShelterUtil {
 
-    public static HashMap<String, Animal> ANIMALS = new HashMap<>();
+    public static final HashMap<String, Animal> ANIMALS = new HashMap<>();
     private static final MySQL mySQL = MySQL.getInstance();
 
     public static void addAnimal(Animal animal, Shelter shelter) {

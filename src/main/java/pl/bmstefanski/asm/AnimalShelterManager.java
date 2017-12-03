@@ -15,7 +15,7 @@ public class AnimalShelterManager {
 
     private static DatabaseManager database = DatabaseManager.getInstance();
     private static MySQL mySQL = MySQL.getInstance();
-    private static final CommandMap commandMap = new CommandMap();
+    private static final CommandMap COMMAND_MAP = new CommandMap();
 
     public static void main(String[] args) {
         database.establishConnection();
@@ -26,8 +26,8 @@ public class AnimalShelterManager {
         service.scheduleAtFixedRate(new GrowingThread(), 0, 5, TimeUnit.HOURS);
 
         System.out.println("------------------[ ASM ]------------------");
-        for (SimpleCommand simpleCommand : commandMap.getCommands()) {
-            System.out.println(commandMap.getPrefix() + simpleCommand.getName() + " - " + simpleCommand.getDescription());
+        for (SimpleCommand simpleCommand : COMMAND_MAP.getCommands()) {
+            System.out.println(COMMAND_MAP.getPrefix() + simpleCommand.getName() + " - " + simpleCommand.getDescription());
         }
         System.out.println("-------------------------------------------");
 
@@ -36,10 +36,10 @@ public class AnimalShelterManager {
         while (true) {
             String result = scanner.nextLine();
 
-            if (result.startsWith(commandMap.getPrefix())) {
-                result = result.replaceFirst(commandMap.getPrefix(), "");
+            if (result.startsWith(COMMAND_MAP.getPrefix())) {
+                result = result.replaceFirst(COMMAND_MAP.getPrefix(), "");
 
-                commandMap.commandUser(result);
+                COMMAND_MAP.commandUser(result);
             }
         }
 

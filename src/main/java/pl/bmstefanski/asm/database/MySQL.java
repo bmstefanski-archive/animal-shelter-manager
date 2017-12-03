@@ -7,6 +7,7 @@ import pl.bmstefanski.asm.basic.util.ShelterUtil;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.UUID;
 
 public class MySQL implements Database {
@@ -25,7 +26,7 @@ public class MySQL implements Database {
                     "`name` VARCHAR(100) NOT NULL," +
                     "`health` DOUBLE NOT NULL," +
                     "`age` INTEGER NOT NULL," +
-                    "`uuid` VARCHAR(36) NOT NULL," +
+                    "`uuid` BINARY(36) NOT NULL," +
                     "`birth` TIMESTAMP NOT NULL," +
                     "PRIMARY KEY (`name`));";
 
@@ -49,7 +50,7 @@ public class MySQL implements Database {
                 Animal animal = new Animal(resultSet.getString("name"));
                 animal.setHealth(resultSet.getDouble("health"));
                 animal.setAge(resultSet.getInt("age"));
-                animal.setUUID(UUID.fromString(resultSet.getString("uuid")));
+                animal.setUUID(UUID.nameUUIDFromBytes(resultSet.getBytes("uuid")));
                 animal.setBirth(resultSet.getTimestamp("birth"));
 
                 ShelterUtil.ANIMALS.put(animal.getName(), animal);
@@ -73,7 +74,7 @@ public class MySQL implements Database {
                 preparedStatement.setString(1, value.getName());
                 preparedStatement.setDouble(2, value.getHealth());
                 preparedStatement.setInt(3, value.getAge());
-                preparedStatement.setString(4, value.getUUID().toString());
+                preparedStatement.setObject(4, value.getUUID(), Types.BINARY);
                 preparedStatement.setTimestamp(5, value.getBirth());
                 preparedStatement.setString(6, value.getName());
 
@@ -94,7 +95,7 @@ public class MySQL implements Database {
             preparedStatement.setString(1, animal.getName());
             preparedStatement.setDouble(2, animal.getHealth());
             preparedStatement.setInt(3, animal.getAge());
-            preparedStatement.setString(4, animal.getUUID().toString());
+            preparedStatement.setObject(4, animal.getUUID(), Types.BINARY);
             preparedStatement.setTimestamp(5, animal.getBirth());
 
 
