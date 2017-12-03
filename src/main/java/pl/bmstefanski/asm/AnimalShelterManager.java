@@ -1,9 +1,9 @@
 package pl.bmstefanski.asm;
 
 import pl.bmstefanski.asm.command.basic.CommandMap;
+import pl.bmstefanski.asm.command.basic.SimpleCommand;
 import pl.bmstefanski.asm.database.MySQL;
 import pl.bmstefanski.asm.manager.DatabaseManager;
-import pl.bmstefanski.asm.basic.Shelter;
 
 import java.util.Scanner;
 
@@ -18,16 +18,12 @@ public class AnimalShelterManager {
         mySQL.checkData();
         mySQL.loadData();
 
-        System.out.println("------[ ASM ]------");
-        System.out.println("!add <name> - add new pet");
-        System.out.println("!remove <name> - remove pet");
-        System.out.println("!status - check shelter's capacity");
-        System.out.println("!list - show all pets");
-        System.out.println("!animal <animal> - statistics");
-        System.out.println("!save - save and exit");
-        System.out.println("-------------------");
+        System.out.println("------------------[ ASM ]------------------");
+        for (SimpleCommand simpleCommand : commandMap.getCommands()) {
+            System.out.println(commandMap.getPrefix() + simpleCommand.getName() + " - " + simpleCommand.getDescription());
+        }
+        System.out.println("-------------------------------------------");
 
-        Shelter shelter = new Shelter(2, "Main");
         Scanner scanner = new Scanner(System.in);
 
         while (true) {

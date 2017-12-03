@@ -1,5 +1,8 @@
 package pl.bmstefanski.asm.basic;
 
+import pl.bmstefanski.asm.util.DateUtil;
+
+import java.sql.Timestamp;
 import java.util.UUID;
 
 public class Animal {
@@ -8,14 +11,13 @@ public class Animal {
     private UUID uuid;
     private double health;
     private int age;
-    private long birth;
+    private Timestamp birth;
 
     public Animal(String name) {
         this.name = name;
         this.uuid = UUID.randomUUID();
         this.health = 100D;
         this.age = 10;
-        this.birth = 0L;
     }
 
     public String getName() {
@@ -46,16 +48,16 @@ public class Animal {
         this.uuid = uuid;
     }
 
-    public long getBirth() {
+    public Timestamp getBirth() {
         return birth;
     }
 
-    public void setBirth(long birth) {
+    public void setBirth(Timestamp birth) {
         this.birth = birth;
     }
 
     @Override
     public String toString() {
-        return "UUID: " + uuid.toString() + " | Name: " + name + " | Health: " + health + " | Age: " + age;
+        return "UUID: " + uuid.toString() + " | Name: " + name + " | Health: " + health + " | Age: " + age + " | Birth: " + birth;
     }
 }

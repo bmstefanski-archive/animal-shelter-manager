@@ -4,6 +4,7 @@ import pl.bmstefanski.asm.basic.Animal;
 import pl.bmstefanski.asm.basic.Shelter;
 import pl.bmstefanski.asm.database.MySQL;
 
+import java.sql.Timestamp;
 import java.util.*;
 
 public class ShelterUtil {
@@ -19,7 +20,8 @@ public class ShelterUtil {
                 return;
             }
 
-            animal.setBirth(System.currentTimeMillis());
+            Timestamp timestamp = new Timestamp(new Date().getTime());
+            animal.setBirth(timestamp);
             mySQL.addAnimal(animal);
             System.out.println("Successfully added a pet named: " + animal.getName() + "!");
         } else System.out.println("Shelter is full, try again later!");
