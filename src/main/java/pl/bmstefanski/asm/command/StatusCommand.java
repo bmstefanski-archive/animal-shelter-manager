@@ -4,8 +4,6 @@ import pl.bmstefanski.asm.basic.Shelter;
 import pl.bmstefanski.asm.basic.util.ShelterUtil;
 import pl.bmstefanski.asm.command.basic.Command;
 
-import java.util.List;
-
 public class StatusCommand {
 
     private final Shelter shelter;
@@ -15,7 +13,7 @@ public class StatusCommand {
     }
 
     @Command(name = "status", description = "check shelter's capacity")
-    private void status(List<String> args) {
+    private void status() {
         ShelterUtil.status(shelter);
     }
 }
