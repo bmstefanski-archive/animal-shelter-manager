@@ -26,7 +26,7 @@ public class ShelterUtil {
             animal.setBirth(timestamp);
             MYSQL.addAnimal(animal);
             System.out.println("Successfully added a pet named: " + animal.getName() + "!");
-        } else System.out.println("ShelterImpl is full, try again later!");
+        } else System.out.println("Shelter is full, try again later!");
     }
 
     public static void removeAnimal(Animal animal) {
