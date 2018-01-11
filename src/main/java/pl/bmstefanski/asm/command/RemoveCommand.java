@@ -1,6 +1,7 @@
 package pl.bmstefanski.asm.command;
 
-import pl.bmstefanski.asm.basic.Animal;
+import pl.bmstefanski.asm.api.basic.Animal;
+import pl.bmstefanski.asm.basic.AnimalImpl;
 import pl.bmstefanski.asm.basic.util.ShelterUtil;
 import pl.bmstefanski.asm.command.basic.Command;
 
@@ -15,6 +16,8 @@ public class RemoveCommand {
             return;
         }
 
-        ShelterUtil.removeAnimal(new Animal(args.get(1)));
+        Animal animal = new AnimalImpl(args.get(1));
+
+        ShelterUtil.removeAnimal(animal);
     }
 }

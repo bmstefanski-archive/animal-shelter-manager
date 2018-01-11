@@ -1,14 +1,14 @@
 package pl.bmstefanski.asm.command;
 
-import pl.bmstefanski.asm.basic.Shelter;
+import pl.bmstefanski.asm.basic.ShelterImpl;
 import pl.bmstefanski.asm.basic.util.ShelterUtil;
 import pl.bmstefanski.asm.command.basic.Command;
 
 public class StatusCommand {
 
-    private final Shelter shelter;
+    private final ShelterImpl shelter;
 
-    public StatusCommand(Shelter shelter) {
+    public StatusCommand(ShelterImpl shelter) {
         this.shelter = shelter;
     }
 

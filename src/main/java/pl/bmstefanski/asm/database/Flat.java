@@ -1,6 +1,6 @@
 package pl.bmstefanski.asm.database;
 
-import pl.bmstefanski.asm.basic.Animal;
+import pl.bmstefanski.asm.api.basic.Animal;
 
 public class Flat implements Database {
 

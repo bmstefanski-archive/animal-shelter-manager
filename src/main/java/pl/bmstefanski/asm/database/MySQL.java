@@ -1,7 +1,8 @@
 package pl.bmstefanski.asm.database;
 
+import pl.bmstefanski.asm.api.basic.Animal;
 import pl.bmstefanski.asm.manager.DatabaseManager;
-import pl.bmstefanski.asm.basic.Animal;
+import pl.bmstefanski.asm.basic.AnimalImpl;
 import pl.bmstefanski.asm.basic.util.ShelterUtil;
 
 import java.sql.PreparedStatement;
@@ -47,7 +48,7 @@ public class MySQL implements Database {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-                Animal animal = new Animal(resultSet.getString("name"));
+                Animal animal = new AnimalImpl(resultSet.getString("name"));
                 animal.setHealth(resultSet.getDouble("health"));
                 animal.setAge(resultSet.getInt("age"));
                 animal.setUUID(UUID.nameUUIDFromBytes(resultSet.getBytes("uuid")));

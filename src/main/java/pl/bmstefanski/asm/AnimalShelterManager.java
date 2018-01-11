@@ -6,6 +6,7 @@ import pl.bmstefanski.asm.database.MySQL;
 import pl.bmstefanski.asm.manager.DatabaseManager;
 import pl.bmstefanski.asm.task.GrowingThread;
 
+import java.util.Arrays;
 import java.util.Scanner;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;

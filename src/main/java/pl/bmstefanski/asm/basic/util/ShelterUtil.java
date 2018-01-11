@@ -1,7 +1,9 @@
 package pl.bmstefanski.asm.basic.util;
 
-import pl.bmstefanski.asm.basic.Animal;
-import pl.bmstefanski.asm.basic.Shelter;
+import pl.bmstefanski.asm.api.basic.Animal;
+import pl.bmstefanski.asm.api.basic.Shelter;
+import pl.bmstefanski.asm.basic.AnimalImpl;
+import pl.bmstefanski.asm.basic.ShelterImpl;
 import pl.bmstefanski.asm.database.MySQL;
 
 import java.sql.Timestamp;
@@ -9,8 +11,8 @@ import java.util.*;
 
 public class ShelterUtil {
 
-    public static final HashMap<String, Animal> ANIMALS = new HashMap<>();
-    private static final MySQL mySQL = MySQL.getInstance();
+    public static final Map<String, Animal> ANIMALS = new HashMap<>();
+    private static final MySQL MYSQL = MySQL.getInstance();
 
     public static void addAnimal(Animal animal, Shelter shelter) {
         if(ANIMALS.size() < shelter.getCapacity()) {
@@ -22,14 +24,14 @@ public class ShelterUtil {
 
             Timestamp timestamp = new Timestamp(new Date().getTime());
             animal.setBirth(timestamp);
-            mySQL.addAnimal(animal);
+            MYSQL.addAnimal(animal);
             System.out.println("Successfully added a pet named: " + animal.getName() + "!");
-        } else System.out.println("Shelter is full, try again later!");
+        } else System.out.println("ShelterImpl is full, try again later!");
     }
 
     public static void removeAnimal(Animal animal) {
         if(ANIMALS.containsKey(animal.getName())) {
-            mySQL.removeAnimal(animal);
+            MYSQL.removeAnimal(animal);
             System.out.println("Successfully removed a pet named: " + animal.getName() + "!");
         } else System.out.println("The pet with this name is not exists!");
     }

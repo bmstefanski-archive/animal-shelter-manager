@@ -10,9 +10,9 @@ public class SaveCommand {
 
     @Command(name = "save", description = "save and exit")
     private void save() {
-        mySQL.saveData();
-        Runtime.getRuntime().exit(1);
-
         AnimalShelterManager.EXECUTOR_SERVICE.shutdown();
+        mySQL.saveData();
+
+        Runtime.getRuntime().exit(1);
     }
 }

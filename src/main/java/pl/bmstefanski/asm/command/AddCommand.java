@@ -1,7 +1,8 @@
 package pl.bmstefanski.asm.command;
 
-import pl.bmstefanski.asm.basic.Animal;
-import pl.bmstefanski.asm.basic.Shelter;
+import pl.bmstefanski.asm.api.basic.Animal;
+import pl.bmstefanski.asm.basic.AnimalImpl;
+import pl.bmstefanski.asm.basic.ShelterImpl;
 import pl.bmstefanski.asm.basic.util.ShelterUtil;
 import pl.bmstefanski.asm.command.basic.Command;
 
@@ -9,9 +10,9 @@ import java.util.List;
 
 public class AddCommand {
 
-    private final Shelter shelter;
+    private final ShelterImpl shelter;
 
-    public AddCommand(Shelter shelter) {
+    public AddCommand(ShelterImpl shelter) {
         this.shelter = shelter;
     }
 
@@ -22,6 +23,8 @@ public class AddCommand {
             return;
         }
 
-        ShelterUtil.addAnimal(new Animal(args.get(1)), shelter);
+        Animal animal = new AnimalImpl(args.get(1));
+
+        ShelterUtil.addAnimal(animal, shelter);
     }
 }
