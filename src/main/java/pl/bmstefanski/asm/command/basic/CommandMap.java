@@ -1,5 +1,6 @@
 package pl.bmstefanski.asm.command.basic;
 
+import pl.bmstefanski.asm.api.basic.Shelter;
 import pl.bmstefanski.asm.basic.ShelterImpl;
 import pl.bmstefanski.asm.command.*;
 
@@ -13,7 +14,7 @@ public class CommandMap {
 
     private final Map<String, SimpleCommand> commands = new HashMap<>();
     private final String prefix = "!";
-    private final ShelterImpl shelter = new ShelterImpl(2, "Main");
+    private final Shelter shelter = new ShelterImpl(2, "Main");
 
     public CommandMap() {
         registerCommand(new AddCommand(shelter));
