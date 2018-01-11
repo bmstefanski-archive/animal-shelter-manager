@@ -2,8 +2,6 @@ package pl.bmstefanski.asm.basic.util;
 
 import pl.bmstefanski.asm.api.basic.Animal;
 import pl.bmstefanski.asm.api.basic.Shelter;
-import pl.bmstefanski.asm.basic.AnimalImpl;
-import pl.bmstefanski.asm.basic.ShelterImpl;
 import pl.bmstefanski.asm.database.MySQL;
 
 import java.sql.Timestamp;
