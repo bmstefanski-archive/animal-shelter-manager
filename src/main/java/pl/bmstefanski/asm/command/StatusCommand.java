@@ -1,7 +1,7 @@
 package pl.bmstefanski.asm.command;
 
 import pl.bmstefanski.asm.AnimalShelterManager;
-import pl.bmstefanski.asm.basic.util.ShelterManager;
+import pl.bmstefanski.asm.basic.manager.AnimalManager;
 import pl.bmstefanski.asm.command.basic.Command;
 
 public class StatusCommand {
@@ -14,6 +14,6 @@ public class StatusCommand {
 
     @Command(name = "status", description = "check shelter's capacity")
     private void status() {
-        ShelterManager.status(main.getShelter());
+        AnimalManager.status(main.getShelter());
     }
 }

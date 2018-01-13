@@ -1,6 +1,6 @@
 package pl.bmstefanski.asm.task;
 
-import pl.bmstefanski.asm.basic.util.ShelterManager;
+import pl.bmstefanski.asm.basic.manager.AnimalManager;
 
 import java.util.Random;
 
@@ -10,6 +10,6 @@ public class GrowingThread implements Runnable {
 
     @Override
     public void run() {
-        ShelterManager.ANIMALS.forEach((key, value) -> value.setAge(value.getAge() + random.nextInt(5)));
+        AnimalManager.getAnimalMap().forEach((key, value) -> value.setAge(value.getAge() + random.nextInt(5)));
     }
 }

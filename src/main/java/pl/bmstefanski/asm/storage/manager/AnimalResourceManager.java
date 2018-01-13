@@ -3,7 +3,7 @@ package pl.bmstefanski.asm.storage.manager;
 import pl.bmstefanski.asm.api.basic.Animal;
 import pl.bmstefanski.asm.api.storage.Storage;
 import pl.bmstefanski.asm.basic.AnimalImpl;
-import pl.bmstefanski.asm.basic.util.ShelterManager;
+import pl.bmstefanski.asm.basic.manager.AnimalManager;
 import pl.bmstefanski.asm.storage.AbstractStorage;
 import pl.bmstefanski.asm.type.StatementType;
 
@@ -47,7 +47,7 @@ public class AnimalResourceManager extends AbstractStorage {
                 animal.setUUID(UUID.nameUUIDFromBytes(resultSet.getBytes("uuid")));
                 animal.setBirth(resultSet.getTimestamp("birth"));
 
-                ShelterManager.ANIMALS.put(animal.getName(), animal);
+                AnimalManager.getAnimalMap().put(animal.getName(), animal);
             }
 
             resultSet.close();
@@ -62,7 +62,7 @@ public class AnimalResourceManager extends AbstractStorage {
 
         getStorage().connect();
 
-        ShelterManager.ANIMALS.forEach((key, value) -> {
+        AnimalManager.getAnimalMap().forEach((key, value) -> {
             try {
                 PreparedStatement preparedStatement = getStorage().getPreparedStatement(StatementType.SAVE_ANIMALS.name());
                 preparedStatement.setString(1, value.getName());
@@ -95,7 +95,7 @@ public class AnimalResourceManager extends AbstractStorage {
             preparedStatement.executeUpdate();
             preparedStatement.close();
 
-            ShelterManager.ANIMALS.put(animal.getName(), animal);
+            AnimalManager.getAnimalMap().put(animal.getName(), animal);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -112,7 +112,7 @@ public class AnimalResourceManager extends AbstractStorage {
             preparedStatement.executeUpdate();
             preparedStatement.close();
 
-            ShelterManager.ANIMALS.remove(animal.getName());
+            AnimalManager.getAnimalMap().remove(animal.getName());
         } catch (SQLException ex) {
             ex.printStackTrace();
         }

@@ -3,7 +3,7 @@ package pl.bmstefanski.asm.command;
 import pl.bmstefanski.asm.AnimalShelterManager;
 import pl.bmstefanski.asm.api.basic.Animal;
 import pl.bmstefanski.asm.basic.AnimalImpl;
-import pl.bmstefanski.asm.basic.util.ShelterManager;
+import pl.bmstefanski.asm.basic.manager.AnimalManager;
 import pl.bmstefanski.asm.command.basic.Command;
 
 import java.util.List;
@@ -23,10 +23,8 @@ public class AddCommand {
             return;
         }
 
-        System.out.println(main.getShelter().toString());
-
         Animal animal = new AnimalImpl(args.get(1));
 
-        ShelterManager.addAnimal(animal, main.getShelter());
+        AnimalManager.addAnimal(animal, main.getShelter());
     }
 }
