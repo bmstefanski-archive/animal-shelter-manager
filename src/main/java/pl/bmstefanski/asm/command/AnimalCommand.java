@@ -3,6 +3,7 @@ package pl.bmstefanski.asm.command;
 import pl.bmstefanski.asm.api.basic.Animal;
 import pl.bmstefanski.asm.basic.manager.AnimalManager;
 import pl.bmstefanski.asm.command.basic.Command;
+import pl.bmstefanski.asm.type.Message;
 
 import java.util.List;
 
@@ -14,7 +15,7 @@ public class AnimalCommand {
         Animal animal = AnimalManager.get(args.get(1));
 
         if (!AnimalManager.getAnimalMap().containsKey(animal.getName())) {
-            System.out.println("We do not have pet with this name!");
+            System.out.println(Message.PET_NOT_FOUND);
             return;
         }
 

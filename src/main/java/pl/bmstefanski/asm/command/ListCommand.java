@@ -3,6 +3,7 @@ package pl.bmstefanski.asm.command;
 import pl.bmstefanski.asm.api.basic.Animal;
 import pl.bmstefanski.asm.basic.manager.AnimalManager;
 import pl.bmstefanski.asm.command.basic.Command;
+import pl.bmstefanski.asm.type.Message;
 
 import java.util.Map;
 
@@ -14,7 +15,7 @@ public class ListCommand {
         Map<String, Animal> animals = AnimalManager.getAnimalMap();
 
         if (animals.isEmpty()) {
-            System.out.println("We don't yet have any pet!");
+            System.out.println(Message.NO_PETS);
             return;
         }
 

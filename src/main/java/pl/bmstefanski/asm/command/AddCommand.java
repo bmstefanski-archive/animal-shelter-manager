@@ -1,10 +1,12 @@
 package pl.bmstefanski.asm.command;
 
+import org.apache.commons.lang3.StringUtils;
 import pl.bmstefanski.asm.AnimalShelterManager;
 import pl.bmstefanski.asm.api.basic.Animal;
 import pl.bmstefanski.asm.basic.AnimalImpl;
 import pl.bmstefanski.asm.basic.manager.AnimalManager;
 import pl.bmstefanski.asm.command.basic.Command;
+import pl.bmstefanski.asm.type.Message;
 
 import java.sql.Timestamp;
 import java.util.Date;
@@ -26,12 +28,12 @@ public class AddCommand {
         Map<String, Animal> animals = AnimalManager.getAnimalMap();
 
         if (animals.size() >= main.getShelter().getCapacity()) {
-            System.out.println("Shelter is full, try again later!");
+            System.out.println(Message.SHELTER_FULL);
             return;
         }
 
         if (animals.containsKey(animal.getName())) {
-            System.out.println("We already have pet with same name!");
+            System.out.println(Message.PET_EXISTS);
             return;
         }
 
@@ -39,6 +41,6 @@ public class AddCommand {
 
         animal.setBirth(timestamp);
         main.getResourceManager().add(animal);
-        System.out.println("Successfully added a pet named: " + animal.getName() + "!");
+        System.out.println(StringUtils.replace(Message.PET_CREATED, "$name", animal.getName()));
     }
 }
