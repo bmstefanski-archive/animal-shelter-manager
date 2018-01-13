@@ -32,8 +32,6 @@ public class AnimalShelterManager implements AnimalShelterManagerApi {
     }
 
     private void start() {
-//        setUpStorage();
-
         EXECUTOR_SERVICE.scheduleAtFixedRate(new GrowingThread(), 0, 1, TimeUnit.HOURS);
 
         this.animalResourceManager.checkTable();
@@ -63,10 +61,6 @@ public class AnimalShelterManager implements AnimalShelterManagerApi {
         AnimalShelterManager animalShelterManager = new AnimalShelterManager();
         animalShelterManager.start();
     }
-
-//    private void setUpStorage() {
-//        storage = new StorageConnector(DataStorageType.MYSQL).getStorage();
-//    }
 
     @Override
     public AnimalResourceManager getResourceManager() {
