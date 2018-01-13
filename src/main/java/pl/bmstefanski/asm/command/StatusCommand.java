@@ -14,6 +14,7 @@ public class StatusCommand {
 
     @Command(name = "status", description = "check shelter's capacity")
     private void status() {
-        AnimalManager.status(main.getShelter());
+        System.out.println("There are " + AnimalManager.getAnimalMap().size() + " out of a maximum " + main.getShelter().getCapacity() + " pets in " + main.getShelter().getName());
+        System.out.println(AnimalManager.getAnimalMap().size() < main.getShelter().getCapacity() ? "You can bring your pet!" : "The shelter is full!");
     }
 }

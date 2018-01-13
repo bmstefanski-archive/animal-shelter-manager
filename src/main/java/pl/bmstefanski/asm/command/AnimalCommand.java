@@ -17,6 +17,11 @@ public class AnimalCommand {
 
         Animal animal = AnimalManager.get(args.get(1));
 
-        AnimalManager.info(animal);
+        if (!AnimalManager.getAnimalMap().containsKey(animal.getName())) {
+            System.out.println("We do not have pet with this name!");
+            return;
+        }
+
+        System.out.println(animal.toString());
     }
 }

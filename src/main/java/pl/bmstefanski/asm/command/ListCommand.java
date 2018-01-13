@@ -7,6 +7,12 @@ public class ListCommand {
 
     @Command(name = "list", description = "show all pets")
     private void list() {
-        AnimalManager.list();
+
+        if (AnimalManager.getAnimalMap().isEmpty()) {
+            System.out.println("We don't yet have any pet!");
+            return;
+        }
+
+        AnimalManager.getAnimalMap().forEach((key, value) -> System.out.println(value.toString()));
     }
 }

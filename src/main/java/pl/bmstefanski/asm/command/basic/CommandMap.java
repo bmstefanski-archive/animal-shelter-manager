@@ -19,7 +19,7 @@ public class CommandMap {
         registerCommand(new AddCommand(main));
         registerCommand(new AnimalCommand());
         registerCommand(new ListCommand());
-        registerCommand(new RemoveCommand());
+        registerCommand(new RemoveCommand(main));
         registerCommand(new SaveCommand(main));
         registerCommand(new StatusCommand(main));
     }
