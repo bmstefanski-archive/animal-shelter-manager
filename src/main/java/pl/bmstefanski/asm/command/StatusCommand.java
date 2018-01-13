@@ -16,7 +16,7 @@ public class StatusCommand {
         this.main = main;
     }
 
-    @Command(name = "status", description = "check shelter's capacity")
+    @Command(name = "status", description = "check shelter's capacity", min = 1, max = 1)
     private void status() {
 
         Map<String, Animal> animals = AnimalManager.getAnimalMap();

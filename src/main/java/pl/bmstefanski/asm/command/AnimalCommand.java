@@ -8,12 +8,8 @@ import java.util.List;
 
 public class AnimalCommand {
 
-    @Command(name = "animal", description = "statistics")
+    @Command(name = "animal", description = "statistics", usage = "[name]", min = 2, max = 2)
     private void animal(List<String> args) {
-        if (args.size() != 2) {
-            System.out.println("Correct usage: !animal <animal>");
-            return;
-        }
 
         Animal animal = AnimalManager.get(args.get(1));
 

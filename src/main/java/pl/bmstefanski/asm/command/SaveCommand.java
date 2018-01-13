@@ -11,7 +11,7 @@ public class SaveCommand {
         this.main = main;
     }
 
-    @Command(name = "save", description = "save and exit")
+    @Command(name = "save", description = "save and exit", min = 1, max = 1)
     private void save() {
         AnimalShelterManager.EXECUTOR_SERVICE.shutdown();
 

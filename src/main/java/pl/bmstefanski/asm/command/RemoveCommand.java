@@ -16,12 +16,8 @@ public class RemoveCommand {
         this.main = main;
     }
 
-    @Command(name = "remove", description = "remove pet")
+    @Command(name = "remove", description = "remove pet", usage = "[name]", min = 2, max = 2)
     private void remove(List<String> args) {
-        if (args.size() != 2) {
-            System.out.println("Correct usage: !remove <animal>");
-            return;
-        }
 
         Animal animal = new AnimalImpl(args.get(1));
 

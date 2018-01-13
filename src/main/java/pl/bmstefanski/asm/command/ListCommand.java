@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class ListCommand {
 
-    @Command(name = "list", description = "show all pets")
+    @Command(name = "list", description = "show all pets", min = 1, max = 1)
     private void list() {
 
         Map<String, Animal> animals = AnimalManager.getAnimalMap();

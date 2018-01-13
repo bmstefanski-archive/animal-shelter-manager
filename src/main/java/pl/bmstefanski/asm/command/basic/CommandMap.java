@@ -29,7 +29,7 @@ public class CommandMap {
             if (method.isAnnotationPresent(Command.class)) {
                 Command command = method.getAnnotation(Command.class);
                 method.setAccessible(true);
-                SimpleCommand simpleCommand = new SimpleCommand(command.name(), command.description(), object, method);
+                SimpleCommand simpleCommand = new SimpleCommand(command.name(), command.description(), command.usage(), command.min(), command.max(), object, method);
                 commands.put(command.name(), simpleCommand);
             }
         }
@@ -64,6 +64,11 @@ public class CommandMap {
         for (int i = 0; i < parameters.length; i++) {
             if (parameters[i].getType() == List.class) objects[i] = args;
             else if (parameters[i].getType() == String.class) objects[i] = command;
+        }
+
+        if ((args.size() < simpleCommand.getMin()) || (args.size() > simpleCommand.getMax())) {
+            System.out.println("Correct usage: " + prefix + simpleCommand.getName() + " " + simpleCommand.getUsage());
+            return;
         }
 
         simpleCommand.getMethod().invoke(simpleCommand.getObject(), objects);

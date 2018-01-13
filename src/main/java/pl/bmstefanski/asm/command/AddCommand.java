@@ -19,13 +19,8 @@ public class AddCommand {
         this.main = main;
     }
 
-    @Command(name = "add", description = "add new pet")
+    @Command(name = "add", description = "add new pet", usage = "[name]", min = 2, max = 2)
     private void add(List<String> args) {
-
-        if (args.size() != 2) {
-            System.out.println("Correct usage: !add <animal>");
-            return;
-        }
 
         Animal animal = new AnimalImpl(args.get(1));
         Map<String, Animal> animals = AnimalManager.getAnimalMap();
