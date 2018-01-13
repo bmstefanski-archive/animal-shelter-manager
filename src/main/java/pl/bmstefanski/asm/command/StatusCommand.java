@@ -1,8 +1,12 @@
 package pl.bmstefanski.asm.command;
 
 import pl.bmstefanski.asm.AnimalShelterManager;
+import pl.bmstefanski.asm.api.basic.Animal;
+import pl.bmstefanski.asm.api.basic.Shelter;
 import pl.bmstefanski.asm.basic.manager.AnimalManager;
 import pl.bmstefanski.asm.command.basic.Command;
+
+import java.util.Map;
 
 public class StatusCommand {
 
@@ -14,7 +18,11 @@ public class StatusCommand {
 
     @Command(name = "status", description = "check shelter's capacity")
     private void status() {
-        System.out.println("There are " + AnimalManager.getAnimalMap().size() + " out of a maximum " + main.getShelter().getCapacity() + " pets in " + main.getShelter().getName());
-        System.out.println(AnimalManager.getAnimalMap().size() < main.getShelter().getCapacity() ? "You can bring your pet!" : "The shelter is full!");
+
+        Map<String, Animal> animals = AnimalManager.getAnimalMap();
+        Shelter shelter = main.getShelter();
+
+        System.out.println("There are " + animals.size() + " out of a maximum " + shelter.getCapacity() + " pets in " + shelter.getName());
+        System.out.println(animals.size() < shelter.getCapacity() ? "You can bring your pet!" : "The shelter is full!");
     }
 }

@@ -9,6 +9,7 @@ import pl.bmstefanski.asm.command.basic.Command;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 public class AddCommand {
 
@@ -27,13 +28,14 @@ public class AddCommand {
         }
 
         Animal animal = new AnimalImpl(args.get(1));
+        Map<String, Animal> animals = AnimalManager.getAnimalMap();
 
-        if (AnimalManager.getAnimalMap().size() >= main.getShelter().getCapacity()) {
+        if (animals.size() >= main.getShelter().getCapacity()) {
             System.out.println("Shelter is full, try again later!");
             return;
         }
 
-        if (AnimalManager.getAnimalMap().containsKey(animal.getName())) {
+        if (animals.containsKey(animal.getName())) {
             System.out.println("We already have pet with same name!");
             return;
         }
