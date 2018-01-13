@@ -1,16 +1,16 @@
 package pl.bmstefanski.asm.basic.util;
 
+import pl.bmstefanski.asm.AnimalShelterManager;
 import pl.bmstefanski.asm.api.basic.Animal;
 import pl.bmstefanski.asm.api.basic.Shelter;
-import pl.bmstefanski.asm.database.MySQL;
 
 import java.sql.Timestamp;
 import java.util.*;
 
-public class ShelterUtil {
+public class ShelterManager {
 
+    private static final AnimalShelterManager MAIN = new AnimalShelterManager();
     public static final Map<String, Animal> ANIMALS = new HashMap<>();
-    private static final MySQL MYSQL = MySQL.getInstance();
 
     public static void addAnimal(Animal animal, Shelter shelter) {
         if(ANIMALS.size() < shelter.getCapacity()) {
@@ -22,14 +22,14 @@ public class ShelterUtil {
 
             Timestamp timestamp = new Timestamp(new Date().getTime());
             animal.setBirth(timestamp);
-            MYSQL.addAnimal(animal);
+            MAIN.getResourceManager().add(animal);
             System.out.println("Successfully added a pet named: " + animal.getName() + "!");
         } else System.out.println("Shelter is full, try again later!");
     }
 
     public static void removeAnimal(Animal animal) {
         if(ANIMALS.containsKey(animal.getName())) {
-            MYSQL.removeAnimal(animal);
+            MAIN.getResourceManager().remove(animal);
             System.out.println("Successfully removed a pet named: " + animal.getName() + "!");
         } else System.out.println("The pet with this name is not exists!");
     }

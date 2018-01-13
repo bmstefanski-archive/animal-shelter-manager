@@ -1,29 +1,44 @@
 package pl.bmstefanski.asm;
 
+import pl.bmstefanski.asm.api.AnimalShelterManagerApi;
+import pl.bmstefanski.asm.api.basic.Shelter;
+import pl.bmstefanski.asm.api.storage.Storage;
+import pl.bmstefanski.asm.basic.ShelterImpl;
 import pl.bmstefanski.asm.command.basic.CommandMap;
 import pl.bmstefanski.asm.command.basic.SimpleCommand;
-import pl.bmstefanski.asm.database.MySQL;
-import pl.bmstefanski.asm.manager.DatabaseManager;
+import pl.bmstefanski.asm.storage.StorageConnector;
+import pl.bmstefanski.asm.storage.manager.AnimalResourceManager;
 import pl.bmstefanski.asm.task.GrowingThread;
+import pl.bmstefanski.asm.type.DataStorageType;
 
 import java.util.Scanner;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-public class AnimalShelterManager {
+public class AnimalShelterManager implements AnimalShelterManagerApi {
 
-    private static        DatabaseManager          database         = DatabaseManager.getInstance();
-    private static        MySQL                    mySQL            = MySQL.getInstance();
-    private static final  CommandMap               COMMAND_MAP      = new CommandMap();
-    public static final   ScheduledExecutorService EXECUTOR_SERVICE = Executors.newScheduledThreadPool(1);
+    private static final CommandMap COMMAND_MAP = new CommandMap();
+    public static final ScheduledExecutorService EXECUTOR_SERVICE = Executors.newScheduledThreadPool(1);
 
-    public static void main(String[] args) {
-        database.establishConnection();
-        mySQL.checkData();
-        mySQL.loadData();
+    private AnimalResourceManager animalResourceManager;
+    private final Shelter shelter;
+    private Storage storage;
+
+    public AnimalShelterManager() {
+        this.storage = new StorageConnector(DataStorageType.MYSQL).getStorage();
+        this.animalResourceManager = new AnimalResourceManager(storage);
+        this.shelter = new ShelterImpl(2, "Main");
+    }
+
+    private void start() {
+//        setUpStorage();
 
         EXECUTOR_SERVICE.scheduleAtFixedRate(new GrowingThread(), 0, 1, TimeUnit.HOURS);
+
+        this.animalResourceManager.checkTable();
+        this.animalResourceManager.load();
+
 
         System.out.println("------------------[ ASM ]------------------");
         for (SimpleCommand simpleCommand : COMMAND_MAP.getCommands()) {
@@ -42,6 +57,29 @@ public class AnimalShelterManager {
                 COMMAND_MAP.commandUser(result);
             }
         }
+    }
 
+    public static void main(String[] args) {
+        AnimalShelterManager animalShelterManager = new AnimalShelterManager();
+        animalShelterManager.start();
+    }
+
+//    private void setUpStorage() {
+//        storage = new StorageConnector(DataStorageType.MYSQL).getStorage();
+//    }
+
+    @Override
+    public AnimalResourceManager getResourceManager() {
+        return animalResourceManager;
+    }
+
+    @Override
+    public Storage getStorage() {
+        return storage;
+    }
+
+    @Override
+    public Shelter getShelter() {
+        return shelter;
     }
 }

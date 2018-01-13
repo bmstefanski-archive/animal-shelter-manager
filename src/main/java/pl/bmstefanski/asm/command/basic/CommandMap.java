@@ -1,7 +1,6 @@
 package pl.bmstefanski.asm.command.basic;
 
-import pl.bmstefanski.asm.api.basic.Shelter;
-import pl.bmstefanski.asm.basic.ShelterImpl;
+import pl.bmstefanski.asm.AnimalShelterManager;
 import pl.bmstefanski.asm.command.*;
 
 import java.lang.reflect.InvocationTargetException;
@@ -12,17 +11,17 @@ import java.util.stream.Collectors;
 
 public class CommandMap {
 
+    private final AnimalShelterManager main = new AnimalShelterManager();
     private final Map<String, SimpleCommand> commands = new HashMap<>();
     private final String prefix = "!";
-    private final Shelter shelter = new ShelterImpl(2, "Main");
 
     public CommandMap() {
-        registerCommand(new AddCommand(shelter));
+        registerCommand(new AddCommand(main));
         registerCommand(new AnimalCommand());
         registerCommand(new ListCommand());
         registerCommand(new RemoveCommand());
-        registerCommand(new SaveCommand());
-        registerCommand(new StatusCommand(shelter));
+        registerCommand(new SaveCommand(main));
+        registerCommand(new StatusCommand(main));
     }
 
     private void registerCommand(Object object) {
